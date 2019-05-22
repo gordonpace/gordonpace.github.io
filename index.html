@@ -1,5 +1,157 @@
 <html>
-<body>
-hello
+<head>
+    <style>
+    @font-face {
+        font-family: "Cormorant Garamond";
+        src: url("fonts/Cormorant_Garamond/CormorantGaramond-Light.ttf") format('truetype');
+    }
+    body {
+        background-color: black;
+        color: white;
+        font-family: 'Cormorant Garamond', serif;
+
+    }
+    div#header {
+        padding-left: 70pt; 
+        font-size: 35pt;
+        line-height: 50pt;
+
+        margin: 0pt;
+
+        position: fixed;
+        left: 0px;
+        top: 0px;        
+        
+        height: 50pt;
+        min-height: 50pt;
+        width: 100vw;
+        z-index: 100;
+
+        background-image: url("images/assiduity.png");
+        background-repeat: no-repeat;
+        background-size: 35pt;
+        background-position-y: center;
+        background-position-x: 20pt;
+
+        background-color: rgba(42, 67, 99, 0.8)
+    }
+    img.logo {
+        width: 60pt;
+    }
+    div#background {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-image: url("images/background-1.jpg");
+        background-position: center;
+        background-size: cover;
+        transition: background 500ms linear;
+    }
+    div#message {
+        position: absolute;
+        top: 50vh;
+        font-size: 50pt;
+        width: 100vw;
+        text-align: center;
+        text-shadow: 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
+        transition-duration: 800ms;
+    }
+    .offscreen {
+        left: 100vw;
+    }
+    .onscreen {
+        left: 0vw
+    }
+    </style>
+</head>
+<body onload="start()">
+    <script>
+        function delay(delta, next) {
+            return (
+                ((_delta, _next) => {
+                    return {
+                        run: function() {
+                            setTimeout(_next.run, _delta)
+                        }
+                    }
+                })(delta, next)
+            )
+        }
+        function showMessage(next) {
+            return (
+                ((_next) => {
+                    return {
+                        run: () => { 
+                            document.getElementById('message').className = 'onscreen' 
+                            _next.run()
+                        }
+                    }
+                })(next)
+            )
+        }
+        function unshowMessage(next) {
+            return (
+                ((_next) => {
+                    return {
+                        run: () => { 
+                            document.getElementById('message').className = 'offscreen'
+                            _next.run()
+                        }
+                    }
+                })(next)
+            )
+        }
+        function setMessage(text, next) {
+            return (
+                ((_text, _next) => {
+                    return {
+                        run: () => { 
+                            document.getElementById('message').innerText = text
+                            _next.run()
+                        }
+                    }
+                })(text, next)
+            )
+        }
+        function changeBackground(image, next) {
+            return (
+                ((_image, _next) => {
+                    return {
+                        run: () => { 
+                            document.getElementById('background').style.backgroundImage = "url('"+_image+"')"
+                            _next.run()
+                        }
+                    }
+                })(image, next)
+            )
+        }
+        function done() {
+            return {
+                run: () => { start() }
+            }
+        }
+        
+        function start() {
+            changeBackground('images/background-1.jpg',
+            setMessage('Smart browsing of Maltese legislation',
+            showMessage(
+            delay(5000,
+            unshowMessage(
+            delay(2000,
+            changeBackground('images/background-2.jpg',
+            setMessage('The law at your fingertips',
+            showMessage(
+            delay(5000,
+            unshowMessage(
+            delay(2000,
+            done()
+            )))))))))))).run()
+        }
+    </script>
+    <div id="background"></div>
+    <div id="header">ASSIDUITY</div>
+    <div id="message" class="offscreen"></div>
 </body>
 </html>
