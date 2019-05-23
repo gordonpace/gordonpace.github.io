@@ -1,5 +1,6 @@
 <html>
 <head>
+    <title>Assiduity</title>
     <style>
     @font-face {
         font-family: "Cormorant Garamond";
@@ -19,34 +20,92 @@
         max-width: 100%;
         overflow-x: hidden;
     }
-    div#header {
-        padding-left: 70pt; 
-        font-size: 35pt;
+    #slider-drawer {
+        z-index: 201;
+    
+        position: absolute;
+        top: 0px;
+        left: 100vw;
+
+        height: 100vh;
+        min-height: 100vh;
+        width: 200pt;
+        min-width: 200pt;
+
+        background-color: rgba(42, 67, 99, 1);
+        transition-duration: 800ms;
+    }
+    #slider-drawer.onscreen {
+        left: calc(100vw - 200pt);
+        box-shadow: 0px 0px 10px black;
+    }
+    #slider-drawer.offscreen {
+        left: 100vw;
+    }
+
+    #slider-drawer-background-overlay {
+        z-index: 200;
+        position: absolute;
+        top: 0px;
+        
+        width: 100vw;
+        min-width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+
+        background-color: rgba(0,0,0,0.5);
+        transition-duration: 400ms;
+    }
+    #slider-drawer-background-overlay.onscreen {
+        left: 0px;
+    }
+    #slider-drawer-background-overlay.offscreen {
+        left: 100vw;
+    }
+    
+    
+    #header-bar {
+        position: absolute;
+
+        padding-left: 5vw; 
+        padding-right: 5vw;
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        font-size: 30pt;
         line-height: 50pt;
 
         margin: 0pt;
-
-        position: fixed;
         left: 0px;
-        top: 0px;        
         
         height: 50pt;
         min-height: 50pt;
-        width: 100vw;
+        width: 90vw;
         z-index: 100;
 
-        background-image: url("images/assiduity.png");
-        background-repeat: no-repeat;
-        background-size: 35pt;
-        background-position-y: center;
-        background-position-x: 20pt;
+        background-color: rgba(42, 67, 99, 0.8);
+        transition-duration: 800ms;
+    }
+    #header-bar.onscreen {
+        top: 0pt; 
+    }
+    #header-bar.offscreen {
+        top: -50pt; 
+    }
+    #header-img {
+        position: absolute;
+        top: 10pt;
+        height: 30pt;
+        vertical-align: middle;
+    }
+    #header-menu {
+        position: absolute;
+        right: 5vw;
+        cursor: pointer;
+    }
 
-        background-color: rgba(42, 67, 99, 0.8)
-    }
-    img.logo {
-        width: 60pt;
-    }
     div#background {
+        z-index: 0;
         position: absolute;
         top: 0px;
         left: 0px;
@@ -59,10 +118,12 @@
         background-size: cover;
         transition: background 500ms linear;
     }
+
     #message {
+        z-index: 1;
         position: absolute;
         display:table;
-	overflow: hidden;
+        overflow: hidden;
         
         top: 0px; 
 
@@ -83,27 +144,42 @@
         text-shadow: 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
         transition-duration: 800ms;
     }
+    #message.offscreen {
+        left: 100vw;
+    }
+    #message.onscreen {
+        left: 0vw
+    }
+
     #text {
         display: table-cell; 
         vertical-align: middle; 
         text-align: center; 
-	overflow: hidden;
-    }
-    .offscreen {
-        left: 100vw;
-    }
-    .onscreen {
-        left: 0vw
+    	overflow: hidden;
     }
     </style>
 </head>
-<body onload="start()">
+<body onload="pageInitialisation()">
     <script>
+        function unshowHeader() {
+            return {
+                run: () => {
+                    document.getElementById('header-bar').className = 'offscreen'
+                }
+            }
+        }
+        function showHeader() {
+            return {
+                run: () => {
+                    document.getElementById('header-bar').className = 'onscreen'
+                }
+            }
+        }
         function delay(delta, next) {
             return (
                 ((_delta, _next) => {
                     return {
-                        run: function() {
+                        run: () => {
                             setTimeout(_next.run, _delta)
                         }
                     }
@@ -158,13 +234,51 @@
                 })(image, next)
             )
         }
-        function redo() {
+        function openSlideoutMenu(next) {
+            return (
+                ((_next) => {
+                    return {
+                        run: () => {
+                            document.getElementById('slider-drawer').className = 'onscreen'
+                            document.getElementById('slider-drawer-background-overlay').className = 'onscreen'
+                            _next.run()
+                        }
+                    }
+                })(next)
+            )
+        }
+        function closeSlideoutMenu(next) {
+            return (
+                ((_next) => {
+                    return {
+                        run: () => {
+                            document.getElementById('slider-drawer').className = 'offscreen'
+                            document.getElementById('slider-drawer-background-overlay').className = 'offscreen'
+                            _next.run()
+                        }
+                    }
+                })(next)
+            )
+        }
+        function goto(f) {
             return {
-                run: () => { start() }
+                run: () => { f() }
+            }
+        }
+        function done() {
+            return {
+                run: () => {}
             }
         }
         
-        function start() {
+        function pageInitialisation() {
+            showHeader(
+                done()
+            ).run()
+
+            animation()
+        }
+        function animation() {
             changeBackground('images/background-1.jpg',
             setMessage('Smart browsing of Maltese legislation',
             showMessage(
@@ -177,14 +291,40 @@
             delay(5000,
             unshowMessage(
             delay(2000,
-            redo()
+            goto(animation)
             )))))))))))).run()
+        }
+    
+        function openMenu() {
+            openSlideoutMenu(
+                unshowHeader(
+                    done()
+                )
+            ).run()
+        }
+        function closeMenu() {
+            closeSlideoutMenu(
+                showHeader(
+                    done()
+                )
+            ).run()
         }
     </script>
     <div id="background"></div>
-    <div id="header">ASSIDUITY</div>
     <div id="message" class="offscreen">
-        <span id="text">Bang</span>
+            <span id="text"></span>
     </div>
+
+    <div id="header-bar" class="offscreen">
+        <span id="header-title">
+            <img id="header-img" src="images/assiduity.png"></img>
+        </span>
+        <span onclick="openMenu()" id="header-menu" class="offscreen">&#9776;</span>
+    </div>
+
+    <div id="slider-drawer" class="offscreen"></div>
+    <div id="slider-drawer-background-overlay" class="offscreen" onclick="closeMenu()"></div>
+
+
 </body>
 </html>
