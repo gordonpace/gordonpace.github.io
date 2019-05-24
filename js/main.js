@@ -40,7 +40,6 @@ function showFooter(next) {
         ((_next) => {
             return {
                 run: () => {
-                    alert('x')
                     document.getElementById('footer-bar').classList.remove('offscreen')
                     document.getElementById('footer-bar').classList.add('onscreen')
                     _next.run()
@@ -84,7 +83,8 @@ function showMessage(next) {
         ((_next) => {
             return {
                 run: () => { 
-                    document.getElementById('background-message').className = 'onscreen' 
+                    document.getElementById('background-message').classList.remove('offscreen')
+                    document.getElementById('background-message').classList.add('onscreen')
                     _next.run()
                 }
             }
@@ -96,7 +96,8 @@ function unshowMessage(next) {
         ((_next) => {
             return {
                 run: () => { 
-                    document.getElementById('background-message').className = 'offscreen'
+                    document.getElementById('background-message').classList.remove('onscreen')
+                    document.getElementById('background-message').classList.add('offscreen')
                     _next.run()
                 }
             }
@@ -138,8 +139,12 @@ function openAboutUsSlideoutPage(next) {
         ((_next) => {
             return {
                 run: () => {
-                    document.getElementById('about-us-slider-drawer').className = 'onscreen'
-                    document.getElementById('about-us-slider-drawer-background-overlay').className = 'onscreen'
+                    document.getElementById('about-us-slider-drawer').classList.remove('offscreen')
+                    document.getElementById('about-us-slider-drawer').classList.add('onscreen')
+
+                    document.getElementById('about-us-slider-drawer-background-overlay').classList.remove('offscreen')
+                    document.getElementById('about-us-slider-drawer-background-overlay').classList.add('onscreen')
+
                     _next.run()
                 }
             }
@@ -151,8 +156,12 @@ function closeAboutUsSlideoutPage(next) {
         ((_next) => {
             return {
                 run: () => {
-                    document.getElementById('about-us-slider-drawer').className = 'offscreen'
-                    document.getElementById('about-us-slider-drawer-background-overlay').className = 'offscreen'
+                    document.getElementById('about-us-slider-drawer').classList.remove('onscreen')
+                    document.getElementById('about-us-slider-drawer').classList.add('offscreen')
+
+                    document.getElementById('about-us-slider-drawer-background-overlay').classList.remove('onscreen')
+                    document.getElementById('about-us-slider-drawer-background-overlay').classList.add('offscreen')
+
                     _next.run()
                 }
             }
@@ -168,8 +177,12 @@ function openOurAppSlideoutPage(next) {
         ((_next) => {
             return {
                 run: () => {
-                    document.getElementById('our-app-slider-drawer').className = 'onscreen'
-                    document.getElementById('our-app-slider-drawer-background-overlay').className = 'onscreen'
+                    document.getElementById('our-app-slider-drawer').classList.remove('offscreen')
+                    document.getElementById('our-app-slider-drawer').classList.add('onscreen')
+
+                    document.getElementById('our-app-slider-drawer-background-overlay').classList.remove('offscreen')
+                    document.getElementById('our-app-slider-drawer-background-overlay').classList.add('onscreen')
+
                     _next.run()
                 }
             }
@@ -181,8 +194,12 @@ function closeOurAppSlideoutPage(next) {
         ((_next) => {
             return {
                 run: () => {
-                    document.getElementById('our-app-slider-drawer').className = 'offscreen'
-                    document.getElementById('our-app-slider-drawer-background-overlay').className = 'offscreen'
+                    document.getElementById('our-app-slider-drawer').classList.remove('onscreen')
+                    document.getElementById('our-app-slider-drawer').classList.add('offscreen')
+
+                    document.getElementById('our-app-slider-drawer-background-overlay').classList.remove('onscreen')
+                    document.getElementById('our-app-slider-drawer-background-overlay').classList.add('offscreen')
+
                     _next.run()
                 }
             }

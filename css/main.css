@@ -3,21 +3,23 @@
         src: url("../fonts/Cormorant_Garamond/CormorantGaramond-Light.ttf") format('truetype');
     }
 
-    @media screen and (max-width: 100vh) {
+    @media screen and (max-width: 99.999vh) {
         .only-mobile {
             display: block;
         }
         .only-computer {
             display: none;
         }
+        body { color: red }
     }
-    @media screen and (min-width: 100.1vh) {
+    @media screen and (min-width: 100vh) {
         .only-mobile {
             display: none;
         }
         .only-computer {
             display: block;
         }
+        body { color: white }
     }
         
     /* -------------------------------------------- */
@@ -31,7 +33,6 @@
 
     body {
         background-color: black;
-        color: white;
         font-family: 'Cormorant Garamond', serif;
 
         max-width: 100%;
