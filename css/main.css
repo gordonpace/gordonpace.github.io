@@ -203,9 +203,7 @@
     }
 
     #footer-bar.onscreen {
-        top: 100px; /* 
-        calc(100vh - 8vh); 
-        */
+        top:  92vh;
     }
     #footer-bar.offscreen {
         top: 100vh; 
