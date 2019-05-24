@@ -41,9 +41,8 @@ function showFooter(next) {
         ((_next) => {
             return {
                 run: () => {
-                    var cs = document.getElementById('footer-bar').classList
-                    cs.remove('offscreen')
-                    cs.add('onscreen')
+                    document.getElementById('footer-bar').classList.remove('offscreen')
+                    document.getElementById('footer-bar').classList.add('onscreen')
                     _next.run()
                 }
             }
