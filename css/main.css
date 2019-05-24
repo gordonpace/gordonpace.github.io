@@ -11,7 +11,7 @@
             display: none;
         }
     }
-    @media screen and (min-width: 100vh) {
+    @media screen and (min-width: 100.1vh) {
         .only-mobile {
             display: none;
         }
