@@ -1,53 +1,4 @@
-/* Animation functions: Header and footer */
-
-function showBars(next) {
-    return (
-        showFooter(
-            showHeader(
-                next
-            )
-        )
-    )
-}
-
-function unshowBars(next) {
-    return (
-        unshowFooter(
-            unshowHeader(
-                next
-            )
-        )
-    )
-}
-
-
-function unshowFooter(next) {
-    return(
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('footer-bar').classList.remove('onscreen')
-                    document.getElementById('footer-bar').classList.add('offscreen')
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
-
-function showFooter(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('footer-bar').classList.remove('offscreen')
-                    document.getElementById('footer-bar').classList.add('onscreen')
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
+/* Animation functions: Header */
 
 function unshowHeader(next) {
     return (
@@ -257,35 +208,35 @@ function backgroundAnimation() {
 
 function openAboutUsPage() {
     openAboutUsSlideoutPage(
-        unshowBars(
+        unshowHeader(
             done()
         )
     ).run()
 }
 function closeAboutUsPage() {
     closeAboutUsSlideoutPage(
-        showBars(
+        showHeader(
             done()
         )
     ).run()
 }
 function openOurAppPage() {
     openOurAppSlideoutPage(
-        unshowBars(
+        unshowHeader(
             done()
         )
     ).run()
 }
 function closeOurAppPage() {
     closeOurAppSlideoutPage(
-        showBars(
+        showHeader(
             done()
         )
     ).run()
 }
 
 function pageInitialisation() {
-    showBars(
+    showHeader(
         backgroundAnimation()
     ).run()
 }

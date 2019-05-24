@@ -178,38 +178,6 @@
     }
     
     /* -------------------------------------------- */
-    /* Footer stuff                                 */
-    #footer-bar {
-        position: absolute;
-
-        padding-left: 5vw; 
-        padding-right: 5vw;
-        padding-top: 0px;
-        padding-bottom: 0px;
-
-        font-size: 4vh;
-        line-height: 8vh;
-
-        margin: 0pt;
-        left: 0px;
-        
-        height: 8vh;
-        min-height: 8vh;
-        width: 90vw;
-        z-index: 100;
-
-        background-color: rgba(42, 67, 99, 0.8);
-        transition-duration: 800ms;
-    }
-
-    #footer-bar.onscreen {
-        top:  92vh;
-    }
-    #footer-bar.offscreen {
-        top: 100vh; 
-    }
-    
-    /* -------------------------------------------- */
     /* Header stuff                                 */
     
     #header-bar {
