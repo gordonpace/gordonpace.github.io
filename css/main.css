@@ -68,6 +68,10 @@
         cursor: pointer;
     }
 
+    .shift-up {
+        position: relative; top: -1px;
+    }
+
     /* -------------------------------------------- */
     /* About us                                     */
 
