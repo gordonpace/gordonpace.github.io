@@ -1,4 +1,55 @@
-/* Animation functions: Header */
+/* Animation functions: Header and footer */
+
+function showBars(next) {
+    return (
+        showFooter(
+            showHeader(
+                next
+            )
+        )
+    )
+}
+
+function unshowBars(next) {
+    return (
+        unshowFooter(
+            unshowHeader(
+                next
+            )
+        )
+    )
+}
+
+
+function unshowFooter(next) {
+    return(
+        ((_next) => {
+            return {
+                run: () => {
+                    var cs = document.getElementById('footer-bar').classList
+                    cs.remove('onscreen')
+                    cs.add('offscreen')
+                    _next.run()
+                }
+            }
+        })(next)
+    )
+}
+
+function showFooter(next) {
+    return (
+        ((_next) => {
+            return {
+                run: () => {
+                    var cs = document.getElementById('footer-bar').classList
+                    cs.remove('offscreen')
+                    cs.add('onscreen')
+                    _next.run()
+                }
+            }
+        })(next)
+    )
+}
 
 function unshowHeader(next) {
     return (
@@ -108,6 +159,36 @@ function closeAboutUsSlideoutPage(next) {
     )
 }
 
+
+/* Animation functions: Our app pane */
+
+function openOurAppSlideoutPage(next) {
+    return (
+        ((_next) => {
+            return {
+                run: () => {
+                    document.getElementById('our-app-slider-drawer').className = 'onscreen'
+                    document.getElementById('our-app-slider-drawer-background-overlay').className = 'onscreen'
+                    _next.run()
+                }
+            }
+        })(next)
+    )
+}
+function closeOurAppSlideoutPage(next) {
+    return (
+        ((_next) => {
+            return {
+                run: () => {
+                    document.getElementById('our-app-slider-drawer').className = 'offscreen'
+                    document.getElementById('our-app-slider-drawer-background-overlay').className = 'offscreen'
+                    _next.run()
+                }
+            }
+        })(next)
+    )
+}
+
 /* Animation functions: General */
 
 function delay(delta, next) {
@@ -132,7 +213,7 @@ function done() {
     }
 }
 
-/* Compound animation */
+/* Compound actions */
 
 function backgroundAnimation() {
     return (
@@ -153,25 +234,40 @@ function backgroundAnimation() {
     )
 }
 
+
 /* Access functions for html page */
 
 function openAboutUsPage() {
     openAboutUsSlideoutPage(
-        unshowHeader(
+        unshowBars(
             done()
         )
     ).run()
 }
 function closeAboutUsPage() {
     closeAboutUsSlideoutPage(
-        showHeader(
+        showBars(
+            done()
+        )
+    ).run()
+}
+function openOurAppPage() {
+    openOurAppSlideoutPage(
+        unshowBars(
+            done()
+        )
+    ).run()
+}
+function closeOurAppPage() {
+    closeOurAppSlideoutPage(
+        showBars(
             done()
         )
     ).run()
 }
 
 function pageInitialisation() {
-    showHeader(
+    showBars(
         backgroundAnimation()
     ).run()
 }

@@ -3,21 +3,19 @@
         src: url("../fonts/Cormorant_Garamond/CormorantGaramond-Light.ttf") format('truetype');
     }
 
-    @media (max-width: 600px) {
+    @media screen and (max-width: 699px) {
         .only-mobile {
-            border: 1px solid red;
             display: block;
         }
         .only-computer {
             display: none;
         }
     }
-    @media (min-width: 600px) {
+    @media screen and (min-width: 700px) {
         .only-mobile {
             display: none;
         }
         .only-computer {
-            border: 1px solid yellow;
             display: block;
         }
     }
@@ -114,13 +112,100 @@
         min-height: 100vh;
 
         background-color: rgba(0,0,0,0.5);
-        transition-duration: 400ms;
+        transition-duration: 800ms;
     }
     #about-us-slider-drawer-background-overlay.onscreen {
         left: 0px;
     }
     #about-us-slider-drawer-background-overlay.offscreen {
         left: 100vw;
+    }
+    
+
+    /* -------------------------------------------- */
+    /* Our app                                      */
+
+    #our-app-slider-drawer {
+        z-index: 400;
+
+        position: absolute;
+        top: 0px;
+
+        height: 100vh;
+        min-height: 100vh;
+        width: 60vw;
+        min-width: 60vw;
+
+        font-size: 3vh;
+        padding: 5vw;
+        background-color: rgba(42, 67, 99, 0.8);
+        transition-duration: 800ms;
+    }
+    #our-app-slider-drawer.onscreen {
+        left: 0px;
+        box-shadow: 0px 0px 10px black;
+    }
+    #our-app-slider-drawer.offscreen {
+        left: -70vw;
+    }
+    #our-app-slider-drawer-close {
+        position: absolute;
+        z-index: 301;
+        top: 2.5vw;
+        right: 2.5vw;
+        cursor: pointer;
+    }
+
+    #our-app-slider-drawer-background-overlay {
+        z-index: 200;
+        position: absolute;
+        top: 0px;
+
+        width: 100vw;
+        min-width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+
+        background-color: rgba(0,0,0,0.5);
+        transition-duration: 800ms;
+    }
+    #our-app-slider-drawer-background-overlay.onscreen {
+        left: 0px;
+    }
+    #our-app-slider-drawer-background-overlay.offscreen {
+        left: -100vw;
+    }
+    
+    /* -------------------------------------------- */
+    /* Footer stuff                                 */
+    #footer-bar {
+        position: absolute;
+
+        padding-left: 5vw; 
+        padding-right: 5vw;
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        font-size: 4vh;
+        line-height: 8vh;
+
+        margin: 0pt;
+        left: 0px;
+        
+        height: 8vh;
+        min-height: 8vh;
+        width: 90vw;
+        z-index: 100;
+
+        background-color: rgba(42, 67, 99, 0.8);
+        transition-duration: 800ms;
+    }
+
+    #footer-bar.onscreen {
+        top: calc(100vh - 8vh); 
+    }
+    #footer-bar.offscreen {
+        top: 100vh; 
     }
     
     /* -------------------------------------------- */
@@ -165,7 +250,7 @@
     /* -------------------------------------------- */
     /* Background images and text messages          */
 
-    #links-text {
+    .links-text {
         position: absolute;
         right: 5vw;
     }

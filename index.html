@@ -16,11 +16,20 @@
 
         <!-- Header -->
         <div id="header-bar" class="offscreen">
-            <span id="header-title">
+            <span id="header-title" class="clickable" onclick="openOurAppPage()">
                 <img id="header-img" src="images/assiduity.png"></img>
             </span>
 
-            <span id="links-text" class="only-computer">
+            <span class="links-text only-computer">
+                <span class="clickable" onclick="openOurAppPage()">Our app</span>
+                &nbsp;|&nbsp;
+                <span class="clickable" onclick="openAboutUsPage()">About us</span>
+            </span>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer-bar" class="only-mobile offscreen">
+            <span class="links-text only-mobile">
                 <span class="clickable" onclick="openOurAppPage()">Our app</span>
                 &nbsp;|&nbsp;
                 <span class="clickable" onclick="openAboutUsPage()">About us</span>
@@ -42,8 +51,21 @@
             <p>Contact us at <a href="mailto:xxx@xxx.xxx">xxx@xxx.xxx</a>.</p>
         </div>
 
-        <!-- About us page -->
-        <!-- Apps page -->
+        <!-- Our app slider drawer -->
+        <div id="our-app-slider-drawer-background-overlay" class="offscreen" onclick="closeOurAppPage()"></div>
+        <div id="our-app-slider-drawer" class="offscreen">
+            <div id="our-app-slider-drawer-close" onclick="closeOurAppPage()"><i class="fa fa-times"></i></div>
+            <h2>Assiduity</h2>
+
+            <p>Assiduity is a mobile app for smart browsing of Maltese legislation. </p>
+
+            <p>Assiduity was partly the outcome of a project by the <a href="http://www.um.edu.mt">University&nbsp;of&nbsp;Malta</a> funded by the Take-Off Seed Fund Award (TOSFA). Its purpose is to provide easy access to the body of laws in Malta for students and practitioners of the law. </p>
+
+            <p>We also acknowledge the financial and legal expertise support from <a href="https://www.gtgadvocates.com/">GTG&nbsp;Advocates</a>.</p>
+
+            <p>Contact us at <a href="mailto:xxx@xxx.xxx">xxx@xxx.xxx</a>.</p>
+        </div>
+
     </div>
 </body>
 </html>
