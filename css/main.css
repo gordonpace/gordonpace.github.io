@@ -3,7 +3,7 @@
         src: url("../fonts/Cormorant_Garamond/CormorantGaramond-Light.ttf") format('truetype');
     }
 
-    @media screen and (max-width: 699pt) {
+    @media screen and (max-width: 100vh) {
         .only-mobile {
             display: block;
         }
@@ -11,7 +11,7 @@
             display: none;
         }
     }
-    @media screen and (min-width: 700pt) {
+    @media screen and (min-width: 100vh) {
         .only-mobile {
             display: none;
         }
