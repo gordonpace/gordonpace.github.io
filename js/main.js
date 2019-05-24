@@ -26,9 +26,8 @@ function unshowFooter(next) {
         ((_next) => {
             return {
                 run: () => {
-                    var cs = document.getElementById('footer-bar').classList
-                    cs.remove('onscreen')
-                    cs.add('offscreen')
+                    document.getElementById('footer-bar').classList.remove('onscreen')
+                    document.getElementById('footer-bar').classList.add('offscreen')
                     _next.run()
                 }
             }
@@ -55,7 +54,8 @@ function unshowHeader(next) {
         ((_next) => {
             return {
                 run: () => {
-                    document.getElementById('header-bar').className = 'offscreen'
+                    document.getElementById('header-bar').classList.remove('onscreen')
+                    document.getElementById('header-bar').classList.add('offscreen')
                     _next.run()
                 }
             }
@@ -67,7 +67,8 @@ function showHeader(next) {
         ((_next) => {
             return {
                 run: () => {
-                    document.getElementById('header-bar').className = 'onscreen'
+                    document.getElementById('header-bar').classList.remove('offscreen')
+                    document.getElementById('header-bar').classList.add('onscreen')
                     _next.run()
                 }
             }
