@@ -40,6 +40,7 @@ function showFooter(next) {
         ((_next) => {
             return {
                 run: () => {
+                    alert('x')
                     document.getElementById('footer-bar').classList.remove('offscreen')
                     document.getElementById('footer-bar').classList.add('onscreen')
                     _next.run()
