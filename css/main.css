@@ -1,0 +1,227 @@
+    @font-face {
+        font-family: "Cormorant Garamond";
+        src: url("../fonts/Cormorant_Garamond/CormorantGaramond-Light.ttf") format('truetype');
+    }
+
+    @media (max-width: 600px) {
+        .only-mobile {
+            border: 1px solid red;
+            display: block;
+        }
+        .only-computer {
+            display: none;
+        }
+    }
+    @media (min-width: 600px) {
+        .only-mobile {
+            display: none;
+        }
+        .only-computer {
+            border: 1px solid yellow;
+            display: block;
+        }
+    }
+        
+    /* -------------------------------------------- */
+    /* Global stuff                                 */
+
+    html {
+        max-width: 100%;
+        min-width: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+        font-family: 'Cormorant Garamond', serif;
+
+        max-width: 100%;
+        min-width: 100%;
+        overflow: hidden;
+    }
+
+    div.body {
+        position: fixed;
+        top:0px; left: 0px;
+        overflow: hidden;
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 100%;
+        min-height: 100%;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        background-color: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+    a:hover {
+        background-color: rgba(255,255,255,0.4);
+        border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    span.clickable {
+        cursor: pointer;
+    }
+
+    /* -------------------------------------------- */
+    /* About us                                     */
+
+    #about-us-slider-drawer {
+        z-index: 300;
+
+        position: absolute;
+        top: 0px;
+
+        height: 100vh;
+        min-height: 100vh;
+        width: 60vw;
+        min-width: 60vw;
+
+        font-size: 3vh;
+        padding: 5vw;
+        background-color: rgba(42, 67, 99, 0.8);
+        transition-duration: 800ms;
+    }
+    #about-us-slider-drawer.onscreen {
+        left: calc(100vw - 70vw);
+        box-shadow: 0px 0px 10px black;
+    }
+    #about-us-slider-drawer.offscreen {
+        left: 100vw;
+    }
+    #about-us-slider-drawer-close {
+        position: absolute;
+        z-index: 301;
+        top: 2.5vw;
+        right: 2.5vw;
+        cursor: pointer;
+    }
+
+    #about-us-slider-drawer-background-overlay {
+        z-index: 200;
+        position: absolute;
+        top: 0px;
+
+        width: 100vw;
+        min-width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+
+        background-color: rgba(0,0,0,0.5);
+        transition-duration: 400ms;
+    }
+    #about-us-slider-drawer-background-overlay.onscreen {
+        left: 0px;
+    }
+    #about-us-slider-drawer-background-overlay.offscreen {
+        left: 100vw;
+    }
+    
+    /* -------------------------------------------- */
+    /* Header stuff                                 */
+    
+    #header-bar {
+        position: absolute;
+
+        padding-left: 5vw; 
+        padding-right: 5vw;
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        font-size: 4vh;
+        line-height: 8vh;
+
+        margin: 0pt;
+        left: 0px;
+        
+        height: 8vh;
+        min-height: 8vh;
+        width: 90vw;
+        z-index: 100;
+
+        background-color: rgba(42, 67, 99, 0.8);
+        transition-duration: 800ms;
+    }
+    #header-bar.onscreen {
+        top: 0pt; 
+    }
+    #header-bar.offscreen {
+        top: -8vh; 
+    }
+    #header-img {
+        position: absolute;
+        top: 1.5vh;
+        height: 5vh;
+        vertical-align: middle;
+    }
+
+
+    /* -------------------------------------------- */
+    /* Background images and text messages          */
+
+    #links-text {
+        position: absolute;
+        right: 5vw;
+    }
+
+    /* -------------------------------------------- */
+    /* Background images and text messages          */
+
+    #background-image {
+        z-index: 0;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-image: url("../images/background-1.jpg");
+        background-position: center;
+        background-size: cover;
+        transition: background 500ms linear;
+    }
+
+    #background-message {
+        z-index: 1;
+        position: absolute;
+        display:table;
+        
+        top: 0px; 
+
+        width: 80vw;
+        height: 80vh;
+        min-width: 80vw;
+        min-height: 80vh;
+
+        margin-left: 10vw;
+        margin-right: 10vw;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+
+        font-size: 50pt;
+        line-height: 50pt;
+        text-align: center;
+        vertical-align: middle;
+        text-shadow: 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
+        transition-duration: 800ms;
+    }
+    #background-message.offscreen {
+        left: 100vw;
+    }
+    #background-message.onscreen {
+        left: 0vw
+    }
+
+    #background-message-text {
+        display: table-cell; 
+        vertical-align: middle; 
+        text-align: center; 
+    }
+
