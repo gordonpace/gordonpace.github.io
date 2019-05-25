@@ -1,175 +1,108 @@
-/* Animation functions: Header */
 
-function unshowHeader(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('header-bar').classList.remove('onscreen')
-                    document.getElementById('header-bar').classList.add('offscreen')
-                    _next.run()
-                }
-            }
-        })(next)
-    )
+function show(id) {
+    document.getElementById(id).classList.remove('offscreen')
+    document.getElementById(id).classList.add('onscreen')
 }
-function showHeader(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('header-bar').classList.remove('offscreen')
-                    document.getElementById('header-bar').classList.add('onscreen')
-                    _next.run()
-                }
-            }
-        })(next)
-    )
+
+function unshow(id) {
+    document.getElementById(id).classList.remove('onscreen')
+    document.getElementById(id).classList.add('offscreen')
 }
+
+function simpleAction(action) {
+    return (((_action) => {
+        return (
+            function (next) {
+                return (
+                    ((_next) => {
+                        return {
+                            run: () => {
+                                _action()
+                                _next.run()
+                            }
+                        }
+                    })(next)
+                )        
+            }
+        )
+        })(action))
+}
+
+function simpleAction1(action) {
+    return ((_action) => {
+        return (
+            function (parameter) {
+                return ((_parameter) => {
+                    return (function (next) {
+                        return (
+                            ((_next) => {
+                                return {
+                                    run: () => {
+                                        _action(_parameter)
+                                        _next.run()
+                                    }
+                                }
+                            })(next)
+                        )
+                    })
+                })(parameter)
+            }
+        )
+    })(action)
+}
+
+/* Animation functions: Header */
+var showHeader = simpleAction(() => { show('header-bar') })
+var unshowHeader = simpleAction(() => { unshow('header-bar') })
 
 /* Animation functions: Background text */
-
-function showMessage(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => { 
-                    document.getElementById('background-message').classList.remove('offscreen')
-                    document.getElementById('background-message').classList.add('onscreen')
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
-function unshowMessage(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => { 
-                    document.getElementById('background-message').classList.remove('onscreen')
-                    document.getElementById('background-message').classList.add('offscreen')
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
-function setMessage(text, next) {
-    return (
-        ((_text, _next) => {
-            return {
-                run: () => { 
-                    document.getElementById('background-message-text').innerText = text
-                    _next.run()
-                }
-            }
-        })(text, next)
-    )
-}
+var showMessage = simpleAction(() => { show('background-message') })
+var unshowMessage = simpleAction(() => { unshow('background-message') })
+var setMessage = simpleAction1((text) => { document.getElementById('background-message-text').innerText = text })
 
 /* Animation functions: Background image */
-
-function changeBackgroundImage(image, next) {
-    return (
-        ((_image, _next) => {
-            return {
-                run: () => { 
-                    document.getElementById('background-image').style.backgroundImage = "url('"+_image+"')"
-                    _next.run()
-                }
-            }
-        })(image, next)
-    )
-}
+var changeBackgroundImage = 
+    simpleAction1((image) => { 
+        document.getElementById('background-image').style.backgroundImage = "url('"+image+"')" 
+    })
 
 /* Animation functions: About us pane */
-
-function openAboutUsSlideoutPage(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('about-us-slider-drawer').classList.remove('offscreen')
-                    document.getElementById('about-us-slider-drawer').classList.add('onscreen')
-
-                    document.getElementById('about-us-slider-drawer-background-overlay').classList.remove('offscreen')
-                    document.getElementById('about-us-slider-drawer-background-overlay').classList.add('onscreen')
-
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
-function closeAboutUsSlideoutPage(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('about-us-slider-drawer').classList.remove('onscreen')
-                    document.getElementById('about-us-slider-drawer').classList.add('offscreen')
-
-                    document.getElementById('about-us-slider-drawer-background-overlay').classList.remove('onscreen')
-                    document.getElementById('about-us-slider-drawer-background-overlay').classList.add('offscreen')
-
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
-
+var openAboutUsSlideoutPage = simpleAction(() => {
+    show('about-us-slider-drawer')
+    show('about-us-slider-drawer-background-overlay')
+})
+var closeAboutUsSlideoutPage = simpleAction(() => {
+    unshow('about-us-slider-drawer')
+    unshow('about-us-slider-drawer-background-overlay')
+})
 
 /* Animation functions: Our app pane */
+var openOurAppSlideoutPage = simpleAction(() => {
+    show('our-app-slider-drawer')
+    show('our-app-slider-drawer-background-overlay')
+})
+var closeOurAppSlideoutPage = simpleAction(() => {
+    unshow('our-app-slider-drawer')
+    unshow('our-app-slider-drawer-background-overlay')
+})
 
-function openOurAppSlideoutPage(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('our-app-slider-drawer').classList.remove('offscreen')
-                    document.getElementById('our-app-slider-drawer').classList.add('onscreen')
-
-                    document.getElementById('our-app-slider-drawer-background-overlay').classList.remove('offscreen')
-                    document.getElementById('our-app-slider-drawer-background-overlay').classList.add('onscreen')
-
-                    _next.run()
-                }
+/* Animation functions: Basic actions */
+function delay(delta) {
+    return ((_delta) => {
+        return (
+            function (next) {
+                return (
+                    (_next) => {
+                        return {
+                            run: () => {
+                                setTimeout(_next.run, _delta)
+                            }
+                        }
+                    }
+                )(next)
             }
-        })(next)
-    )
-}
-function closeOurAppSlideoutPage(next) {
-    return (
-        ((_next) => {
-            return {
-                run: () => {
-                    document.getElementById('our-app-slider-drawer').classList.remove('onscreen')
-                    document.getElementById('our-app-slider-drawer').classList.add('offscreen')
-
-                    document.getElementById('our-app-slider-drawer-background-overlay').classList.remove('onscreen')
-                    document.getElementById('our-app-slider-drawer-background-overlay').classList.add('offscreen')
-
-                    _next.run()
-                }
-            }
-        })(next)
-    )
-}
-
-/* Animation functions: General */
-
-function delay(delta, next) {
-    return (
-        ((_delta, _next) => {
-            return {
-                run: () => {
-                    setTimeout(_next.run, _delta)
-                }
-            }
-        })(delta, next)
-    )
+        )
+    })(delta)
 }
 function goto(f) {
     return {
@@ -186,20 +119,20 @@ function done() {
 
 function backgroundAnimation() {
     return (
-        changeBackgroundImage('images/background-1.jpg',
-        setMessage('Smart browsing of Maltese legislation',
+        changeBackgroundImage('images/background-1.jpg')(
+        setMessage('Smart browsing of Maltese legislation')(
         showMessage(
-        delay(5000,
+        delay(5000)(
         unshowMessage(
-        delay(2000,
-        changeBackgroundImage('images/background-2.jpg',
-        setMessage('The law at your fingertips',
+        delay(2000)(
+        changeBackgroundImage('images/background-2.jpg')(
+        setMessage('The law at your fingertips')(
         showMessage(
-        delay(5000,
+        delay(5000)(
         unshowMessage(
-        delay(2000,
+        delay(2000)(
         goto(backgroundAnimation)
-        ))))))))))))
+        )))))))))))) // This is not LISP
     )
 }
 
@@ -207,36 +140,41 @@ function backgroundAnimation() {
 /* Access functions for html page */
 
 function openAboutUsPage() {
-    openAboutUsSlideoutPage(
+    return (
+        openAboutUsSlideoutPage(
         unshowHeader(
-            done()
-        )
-    ).run()
+        done(
+        )))
+    )
 }
 function closeAboutUsPage() {
-    closeAboutUsSlideoutPage(
+    return (
+        closeAboutUsSlideoutPage(
         showHeader(
-            done()
-        )
-    ).run()
+        done(
+        )))
+    )
 }
 function openOurAppPage() {
-    openOurAppSlideoutPage(
+    return (
+        openOurAppSlideoutPage(
         unshowHeader(
-            done()
-        )
-    ).run()
+        done(
+        )))
+    )
 }
 function closeOurAppPage() {
-    closeOurAppSlideoutPage(
+    return (
+        closeOurAppSlideoutPage(
         showHeader(
-            done()
-        )
-    ).run()
+        done(
+        )))
+    )
 }
-
 function pageInitialisation() {
-    showHeader(
-        backgroundAnimation()
-    ).run()
+    return (
+        showHeader(
+        backgroundAnimation(
+        ))
+    )
 }

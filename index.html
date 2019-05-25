@@ -6,7 +6,7 @@
     <script src="js/main.js"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">.
 </head>
-<body onload="pageInitialisation()">
+<body onload="pageInitialisation().run()">
 
     <div class=body>
         <!-- Background page with images and text scrolling in and out -->
@@ -17,26 +17,26 @@
 
         <!-- Header -->
         <div id="header-bar" class="offscreen">
-            <span id="header-title" class="clickable" onclick="openOurAppPage()">
+            <span id="header-title" class="clickable" onclick="openOurAppPage().run()">
                 <img id="header-img" src="images/assiduity.png"></img>
             </span>
 
             <span class="links-text only-computer">
-                <span class="clickable" onclick="openOurAppPage()">Our app</span>
+                <span class="clickable" onclick="openOurAppPage().run()">Our app</span>
                 &nbsp;|&nbsp;
-                <span class="clickable" onclick="openAboutUsPage()">About us</span>
+                <span class="clickable" onclick="openAboutUsPage().run()">About us</span>
             </span>
             <span class="links-text only-mobile">
-                <span class="clickable" onclick="openOurAppPage()"><i class="fa fa-tablet"></i></span>
+                <span class="clickable" onclick="openOurAppPage().run()"><i class="fa fa-tablet"></i></span>
                 &nbsp;&nbsp;
-                <span class="clickable" onclick="openAboutUsPage()"><i class="shift-up fa fa-info-circle"></i></span>
+                <span class="clickable" onclick="openAboutUsPage().run()"><i class="shift-up fa fa-info-circle"></i></span>
             </span>
         </div>
 
         <!-- About us slider drawer -->
-        <div id="about-us-slider-drawer-background-overlay" class="offscreen" onclick="closeAboutUsPage()"></div>
+        <div id="about-us-slider-drawer-background-overlay" class="offscreen" onclick="closeAboutUsPage().run()"></div>
         <div id="about-us-slider-drawer" class="offscreen">
-            <div id="about-us-slider-drawer-close" onclick="closeAboutUsPage()"><i class="fa fa-times"></i></div>
+            <div id="about-us-slider-drawer-close" onclick="closeAboutUsPage().run()"><i class="fa fa-times"></i></div>
             <h2>Assiduity</h2>
 
             <p>Assiduity is a mobile app for smart browsing of Maltese legislation. </p>
@@ -49,9 +49,9 @@
         </div>
 
         <!-- Our app slider drawer -->
-        <div id="our-app-slider-drawer-background-overlay" class="offscreen" onclick="closeOurAppPage()"></div>
+        <div id="our-app-slider-drawer-background-overlay" class="offscreen" onclick="closeOurAppPage().run()"></div>
         <div id="our-app-slider-drawer" class="offscreen">
-            <div id="our-app-slider-drawer-close" onclick="closeOurAppPage()"><i class="fa fa-times"></i></div>
+            <div id="our-app-slider-drawer-close" onclick="closeOurAppPage().run()"><i class="fa fa-times"></i></div>
             <h2>Assiduity</h2>
 
             <p>Assiduity is a mobile app for smart browsing of Maltese legislation. </p>
